@@ -1,0 +1,447 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbFarmerScheme3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tblBidCrop">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bidId" Type="Int32" />
+    <Property Name="FarmerId" Type="Int32" />
+    <Property Name="CropId" Type="Int32" />
+    <Property Name="BidderId" Type="Int32" />
+    <Property Name="BasePriceAsMSP" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="FinalBidAmount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="BidStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblBid" Relationship="Self.fk_bbb" FromRole="tblBidCrops" ToRole="tblBids" />
+    <NavigationProperty Name="tblBidder" Relationship="Self.fk_bbbid" FromRole="tblBidCrops" ToRole="tblBidder" />
+    <NavigationProperty Name="tblFarmer" Relationship="Self.fk_bbf" FromRole="tblBidCrops" ToRole="tblFarmer" />
+    <NavigationProperty Name="tblCropForSale" Relationship="Self.fk_cbc" FromRole="tblBidCrops" ToRole="tblCropForSale" />
+  </EntityType>
+  <EntityType Name="tblBidder">
+    <Key>
+      <PropertyRef Name="bId" />
+    </Key>
+    <Property Name="bId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bEmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bCity" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bState" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bPincode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bAccountNo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bIFSCcode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bAadhar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bPan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bTraderLicense" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="bPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StatusOfBidderDocx" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ApprovedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ApprovedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="tblBidCrops" Relationship="Self.fk_bbbid" FromRole="tblBidder" ToRole="tblBidCrops" />
+    <NavigationProperty Name="tblBids" Relationship="Self.fk_bb" FromRole="tblBidder" ToRole="tblBids" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.fk_ub" FromRole="tblBidder" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblBid">
+    <Key>
+      <PropertyRef Name="bId" />
+    </Key>
+    <Property Name="bId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CropId" Type="Int32" />
+    <Property Name="BidderId" Type="Int32" />
+    <Property Name="BidAmount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="DateOfBid" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="BidStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblBidCrops" Relationship="Self.fk_bbb" FromRole="tblBids" ToRole="tblBidCrops" />
+    <NavigationProperty Name="tblBidder" Relationship="Self.fk_bb" FromRole="tblBids" ToRole="tblBidder" />
+    <NavigationProperty Name="tblCropForSale" Relationship="Self.fk_cb" FromRole="tblBids" ToRole="tblCropForSale" />
+  </EntityType>
+  <EntityType Name="tblCropDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CropId" Type="Int32" />
+    <Property Name="CropType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CropName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MspPerQuintal" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="ActuarialRatePercentage" Type="Double" Nullable="false" />
+    <Property Name="YeildPerHectareTons" Type="Double" Nullable="false" />
+    <NavigationProperty Name="tblCropForSale" Relationship="Self.fk_cc" FromRole="tblCropDetails" ToRole="tblCropForSale" />
+  </EntityType>
+  <EntityType Name="tblCropForSale">
+    <Key>
+      <PropertyRef Name="CropId" />
+    </Key>
+    <Property Name="CropId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FarmerId" Type="Int32" />
+    <Property Name="CropType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CropName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Quantity" Type="Double" Nullable="false" />
+    <Property Name="FertilizerType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SoilPhCertificate" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateOfSoldCrop" Type="DateTime" Precision="0" />
+    <Property Name="MSP" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="SoldPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="TotalPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="StatusOfCropSaleReq" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblBidCrops" Relationship="Self.fk_cbc" FromRole="tblCropForSale" ToRole="tblBidCrops" />
+    <NavigationProperty Name="tblBids" Relationship="Self.fk_cb" FromRole="tblCropForSale" ToRole="tblBids" />
+    <NavigationProperty Name="tblCropDetails" Relationship="Self.fk_cc" FromRole="tblCropForSale" ToRole="tblCropDetails" />
+    <NavigationProperty Name="tblFarmer" Relationship="Self.fk_fc" FromRole="tblCropForSale" ToRole="tblFarmer" />
+  </EntityType>
+  <EntityType Name="tblFarmer">
+    <Key>
+      <PropertyRef Name="fId" />
+    </Key>
+    <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fUserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fContactNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fEmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fCity" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fState" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fPincode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fLandArea" Type="Double" Nullable="false" />
+    <Property Name="fLandAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fLandPincode" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fAccountNo" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fIFSCcode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fAadhar" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fPan" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fCertificate" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="StatusOfFarmerDocx" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ApprovedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="ApprovedDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="tblBidCrops" Relationship="Self.fk_bbf" FromRole="tblFarmer" ToRole="tblBidCrops" />
+    <NavigationProperty Name="tblCropForSales" Relationship="Self.fk_fc" FromRole="tblFarmer" ToRole="tblCropForSale" />
+    <NavigationProperty Name="tblInsurances" Relationship="Self.fk_fi" FromRole="tblFarmer" ToRole="tblInsurance" />
+    <NavigationProperty Name="tblUsers" Relationship="Self.fk_uf" FromRole="tblFarmer" ToRole="tblUser" />
+  </EntityType>
+  <EntityType Name="tblInsurance">
+    <Key>
+      <PropertyRef Name="InsuranceApplicationId" />
+    </Key>
+    <Property Name="InsuranceApplicationId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FarmerId" Type="Int32" />
+    <Property Name="CropType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Year" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CropName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Area" Type="Double" Nullable="false" />
+    <Property Name="SumInsuredPerHectare" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="tblFarmer" Relationship="Self.fk_fi" FromRole="tblInsurance" ToRole="tblFarmer" />
+    <NavigationProperty Name="tblInsuranceClaims" Relationship="Self.fk_ii" FromRole="tblInsurance" ToRole="tblInsuranceClaim" />
+  </EntityType>
+  <EntityType Name="tblInsuranceClaim">
+    <Key>
+      <PropertyRef Name="InsuranceId" />
+    </Key>
+    <Property Name="InsuranceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Policyno" Type="Int64" />
+    <Property Name="InsuranceComp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="InsureeName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SumInsured" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="DateOfLoss" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CauseOfLoss" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ClaimStatus" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblInsurance" Relationship="Self.fk_ii" FromRole="tblInsuranceClaim" ToRole="tblInsurance" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="EmailId" />
+    </Key>
+    <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="fid" Type="Int32" />
+    <Property Name="bid" Type="Int32" />
+    <NavigationProperty Name="tblBidder" Relationship="Self.fk_ub" FromRole="tblUser" ToRole="tblBidder" />
+    <NavigationProperty Name="tblFarmer" Relationship="Self.fk_uf" FromRole="tblUser" ToRole="tblFarmer" />
+  </EntityType>
+  <Association Name="fk_bbb">
+    <End Role="tblBids" Type="Self.tblBid" Multiplicity="0..1" />
+    <End Role="tblBidCrops" Type="Self.tblBidCrop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBids">
+        <PropertyRef Name="bId" />
+      </Principal>
+      <Dependent Role="tblBidCrops">
+        <PropertyRef Name="bidId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_bbbid">
+    <End Role="tblBidder" Type="Self.tblBidder" Multiplicity="0..1" />
+    <End Role="tblBidCrops" Type="Self.tblBidCrop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBidder">
+        <PropertyRef Name="bId" />
+      </Principal>
+      <Dependent Role="tblBidCrops">
+        <PropertyRef Name="BidderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_bbf">
+    <End Role="tblFarmer" Type="Self.tblFarmer" Multiplicity="0..1" />
+    <End Role="tblBidCrops" Type="Self.tblBidCrop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblFarmer">
+        <PropertyRef Name="fId" />
+      </Principal>
+      <Dependent Role="tblBidCrops">
+        <PropertyRef Name="FarmerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cbc">
+    <End Role="tblCropForSale" Type="Self.tblCropForSale" Multiplicity="0..1" />
+    <End Role="tblBidCrops" Type="Self.tblBidCrop" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCropForSale">
+        <PropertyRef Name="CropId" />
+      </Principal>
+      <Dependent Role="tblBidCrops">
+        <PropertyRef Name="CropId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_bb">
+    <End Role="tblBidder" Type="Self.tblBidder" Multiplicity="0..1" />
+    <End Role="tblBids" Type="Self.tblBid" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBidder">
+        <PropertyRef Name="bId" />
+      </Principal>
+      <Dependent Role="tblBids">
+        <PropertyRef Name="BidderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_ub">
+    <End Role="tblBidder" Type="Self.tblBidder" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBidder">
+        <PropertyRef Name="bId" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="bid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cb">
+    <End Role="tblCropForSale" Type="Self.tblCropForSale" Multiplicity="0..1" />
+    <End Role="tblBids" Type="Self.tblBid" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCropForSale">
+        <PropertyRef Name="CropId" />
+      </Principal>
+      <Dependent Role="tblBids">
+        <PropertyRef Name="CropId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_cc">
+    <End Role="tblCropForSale" Type="Self.tblCropForSale" Multiplicity="0..1" />
+    <End Role="tblCropDetails" Type="Self.tblCropDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCropForSale">
+        <PropertyRef Name="CropId" />
+      </Principal>
+      <Dependent Role="tblCropDetails">
+        <PropertyRef Name="CropId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_fc">
+    <End Role="tblFarmer" Type="Self.tblFarmer" Multiplicity="0..1" />
+    <End Role="tblCropForSale" Type="Self.tblCropForSale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblFarmer">
+        <PropertyRef Name="fId" />
+      </Principal>
+      <Dependent Role="tblCropForSale">
+        <PropertyRef Name="FarmerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_fi">
+    <End Role="tblFarmer" Type="Self.tblFarmer" Multiplicity="0..1" />
+    <End Role="tblInsurance" Type="Self.tblInsurance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblFarmer">
+        <PropertyRef Name="fId" />
+      </Principal>
+      <Dependent Role="tblInsurance">
+        <PropertyRef Name="FarmerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_uf">
+    <End Role="tblFarmer" Type="Self.tblFarmer" Multiplicity="0..1" />
+    <End Role="tblUser" Type="Self.tblUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblFarmer">
+        <PropertyRef Name="fId" />
+      </Principal>
+      <Dependent Role="tblUser">
+        <PropertyRef Name="fid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_ii">
+    <End Role="tblInsurance" Type="Self.tblInsurance" Multiplicity="0..1" />
+    <End Role="tblInsuranceClaim" Type="Self.tblInsuranceClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblInsurance">
+        <PropertyRef Name="InsuranceApplicationId" />
+      </Principal>
+      <Dependent Role="tblInsuranceClaim">
+        <PropertyRef Name="Policyno" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbFarmerScheme3Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="tblBidCrops" EntityType="Self.tblBidCrop" />
+    <EntitySet Name="tblBidders" EntityType="Self.tblBidder" />
+    <EntitySet Name="tblBids" EntityType="Self.tblBid" />
+    <EntitySet Name="tblCropDetails" EntityType="Self.tblCropDetail" />
+    <EntitySet Name="tblCropForSales" EntityType="Self.tblCropForSale" />
+    <EntitySet Name="tblFarmers" EntityType="Self.tblFarmer" />
+    <EntitySet Name="tblInsurances" EntityType="Self.tblInsurance" />
+    <EntitySet Name="tblInsuranceClaims" EntityType="Self.tblInsuranceClaim" />
+    <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+    <AssociationSet Name="fk_bbb" Association="Self.fk_bbb">
+      <End Role="tblBids" EntitySet="tblBids" />
+      <End Role="tblBidCrops" EntitySet="tblBidCrops" />
+    </AssociationSet>
+    <AssociationSet Name="fk_bbbid" Association="Self.fk_bbbid">
+      <End Role="tblBidder" EntitySet="tblBidders" />
+      <End Role="tblBidCrops" EntitySet="tblBidCrops" />
+    </AssociationSet>
+    <AssociationSet Name="fk_bbf" Association="Self.fk_bbf">
+      <End Role="tblFarmer" EntitySet="tblFarmers" />
+      <End Role="tblBidCrops" EntitySet="tblBidCrops" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cbc" Association="Self.fk_cbc">
+      <End Role="tblCropForSale" EntitySet="tblCropForSales" />
+      <End Role="tblBidCrops" EntitySet="tblBidCrops" />
+    </AssociationSet>
+    <AssociationSet Name="fk_bb" Association="Self.fk_bb">
+      <End Role="tblBidder" EntitySet="tblBidders" />
+      <End Role="tblBids" EntitySet="tblBids" />
+    </AssociationSet>
+    <AssociationSet Name="fk_ub" Association="Self.fk_ub">
+      <End Role="tblBidder" EntitySet="tblBidders" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cb" Association="Self.fk_cb">
+      <End Role="tblCropForSale" EntitySet="tblCropForSales" />
+      <End Role="tblBids" EntitySet="tblBids" />
+    </AssociationSet>
+    <AssociationSet Name="fk_cc" Association="Self.fk_cc">
+      <End Role="tblCropForSale" EntitySet="tblCropForSales" />
+      <End Role="tblCropDetails" EntitySet="tblCropDetails" />
+    </AssociationSet>
+    <AssociationSet Name="fk_fc" Association="Self.fk_fc">
+      <End Role="tblFarmer" EntitySet="tblFarmers" />
+      <End Role="tblCropForSale" EntitySet="tblCropForSales" />
+    </AssociationSet>
+    <AssociationSet Name="fk_fi" Association="Self.fk_fi">
+      <End Role="tblFarmer" EntitySet="tblFarmers" />
+      <End Role="tblInsurance" EntitySet="tblInsurances" />
+    </AssociationSet>
+    <AssociationSet Name="fk_uf" Association="Self.fk_uf">
+      <End Role="tblFarmer" EntitySet="tblFarmers" />
+      <End Role="tblUser" EntitySet="tblUsers" />
+    </AssociationSet>
+    <AssociationSet Name="fk_ii" Association="Self.fk_ii">
+      <End Role="tblInsurance" EntitySet="tblInsurances" />
+      <End Role="tblInsuranceClaim" EntitySet="tblInsuranceClaims" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getCropData" ReturnType="Collection(dbFarmerScheme3Model.sp_getCropData_Result)" />
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(dbFarmerScheme3Model.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(dbFarmerScheme3Model.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="sp_newBid">
+      <Parameter Name="cropid" Mode="In" Type="Int32" />
+      <Parameter Name="bidderid" Mode="In" Type="Int32" />
+      <Parameter Name="bidamt" Mode="In" Type="Decimal" />
+      <Parameter Name="dateofbid" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_InsertintoBidCrops">
+      <Parameter Name="bidId" Mode="In" Type="Int32" />
+      <Parameter Name="FarmerId" Mode="In" Type="Int32" />
+      <Parameter Name="CropId" Mode="In" Type="Int32" />
+      <Parameter Name="BidderId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GetMAxBidAmount" ReturnType="Collection(Decimal)">
+      <Parameter Name="cropid" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_getCropData_Result">
+    <Property Type="Int32" Name="CropId" Nullable="false" />
+    <Property Type="Int32" Name="FarmerId" Nullable="true" />
+    <Property Type="String" Name="CropType" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="CropName" Nullable="false" MaxLength="20" />
+    <Property Type="Double" Name="Quantity" Nullable="false" />
+    <Property Type="String" Name="FertilizerType" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="SoilPhCertificate" Nullable="false" MaxLength="200" />
+    <Property Type="DateTime" Name="DateOfSoldCrop" Nullable="true" />
+    <Property Type="Decimal" Name="MSP" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="SoldPrice" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="19" />
+    <Property Type="String" Name="StatusOfCropSaleReq" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>
