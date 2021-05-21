@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="dbFarmerScheme3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="dbFarmerScheme3Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="sysdiagram">
     <Key>
       <PropertyRef Name="diagram_id" />
@@ -90,6 +90,7 @@
     <Property Name="Quantity" Type="Double" Nullable="false" />
     <Property Name="FertilizerType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="SoilPhCertificate" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateOfRequestForSell" Type="DateTime" Precision="0" />
     <Property Name="MSP" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="SoldPrice" Type="Decimal" Precision="19" Scale="4" />
     <Property Name="TotalPrice" Type="Decimal" Precision="19" Scale="4" />
@@ -98,8 +99,6 @@
     <NavigationProperty Name="tblBids" Relationship="Self.fk_cb" FromRole="tblCropForSale" ToRole="tblBids" />
     <NavigationProperty Name="tblCropDetails" Relationship="Self.fk_cc" FromRole="tblCropForSale" ToRole="tblCropDetails" />
     <NavigationProperty Name="tblFarmer" Relationship="Self.fk_fc" FromRole="tblCropForSale" ToRole="tblFarmer" />
-    <Property Name="DateOfRequestForSell" Type="DateTime" Precision="0" />
-    <Property Name="DateOfSoldCrop" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="tblFarmer">
     <Key>
@@ -143,7 +142,6 @@
     <Property Name="SumInsuredPerHectare" Type="Decimal" Precision="19" Scale="4" />
     <NavigationProperty Name="tblFarmer" Relationship="Self.fk_fi" FromRole="tblInsurance" ToRole="tblFarmer" />
     <NavigationProperty Name="tblInsuranceClaims" Relationship="Self.fk_ii" FromRole="tblInsurance" ToRole="tblInsuranceClaim" />
-    <Property Name="DateofApplication" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="tblInsuranceClaim">
     <Key>
@@ -315,7 +313,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="dbFarmerScheme3Entities" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="dbFarmerScheme3Entities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="tblBidCrops" EntityType="Self.tblBidCrop" />
     <EntitySet Name="tblBidders" EntityType="Self.tblBidder" />
@@ -390,26 +388,22 @@
       <Parameter Name="diagramname" Mode="In" Type="String" />
       <Parameter Name="owner_id" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="sp_getCropData" ReturnType="Collection(dbFarmerScheme3Model.sp_getCropData_Result)" />
-    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(dbFarmerScheme3Model.sp_helpdiagramdefinition_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(dbFarmerScheme3Model.sp_helpdiagrams_Result)">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-    </FunctionImport>
-    <FunctionImport Name="sp_renamediagram">
-      <Parameter Name="diagramname" Mode="In" Type="String" />
-      <Parameter Name="owner_id" Mode="In" Type="Int32" />
-      <Parameter Name="new_diagramname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_upgraddiagrams" />
-    <FunctionImport Name="sp_newBid">
+    <FunctionImport Name="sp_getCropData" ReturnType="Collection(dbFarmerScheme3Model1.sp_getCropData_Result)" />
+    <FunctionImport Name="sp_getCropData1" ReturnType="Collection(dbFarmerScheme3Model1.sp_getCropData1_Result)" />
+    <FunctionImport Name="sp_GetMAxBidAmount" ReturnType="Collection(Decimal)">
       <Parameter Name="cropid" Mode="In" Type="Int32" />
-      <Parameter Name="bidderid" Mode="In" Type="Int32" />
-      <Parameter Name="bidamt" Mode="In" Type="Decimal" />
-      <Parameter Name="dateofbid" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_getPendingBidders" ReturnType="Collection(dbFarmerScheme3Model1.sp_getPendingBidders_Result)" />
+    <FunctionImport Name="sp_getpendingbids" ReturnType="Collection(dbFarmerScheme3Model1.sp_getpendingbids_Result)" />
+    <FunctionImport Name="sp_getPendingFarmers" ReturnType="Collection(dbFarmerScheme3Model1.sp_getPendingFarmers_Result)" />
+    <FunctionImport Name="sp_getPendingSaleData" ReturnType="Collection(dbFarmerScheme3Model1.sp_getPendingSaleData_Result)" />
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(dbFarmerScheme3Model1.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(dbFarmerScheme3Model1.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="sp_InsertintoBidCrops">
       <Parameter Name="bidId" Mode="In" Type="Int32" />
@@ -417,45 +411,18 @@
       <Parameter Name="CropId" Mode="In" Type="Int32" />
       <Parameter Name="BidderId" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="sp_GetMAxBidAmount" ReturnType="Collection(Decimal)">
+    <FunctionImport Name="sp_newBid">
       <Parameter Name="cropid" Mode="In" Type="Int32" />
+      <Parameter Name="bidderid" Mode="In" Type="Int32" />
+      <Parameter Name="bidamt" Mode="In" Type="Decimal" />
+      <Parameter Name="dateofbid" Mode="In" Type="DateTime" />
     </FunctionImport>
-    <FunctionImport Name="sp_getPendingBidders" ReturnType="Collection(dbFarmerScheme3Model.sp_getPendingBidders_Result)" />
-    <FunctionImport Name="sp_getpendingbids" ReturnType="Collection(dbFarmerScheme3Model.sp_getpendingbids_Result)" />
-    <FunctionImport Name="sp_getPendingFarmers" ReturnType="Collection(dbFarmerScheme3Model.sp_getPendingFarmers_Result)" />
-    <FunctionImport Name="sp_getPendingSaleData" ReturnType="Collection(dbFarmerScheme3Model.sp_getPendingSaleData_Result)" />
-    <FunctionImport Name="sp_getCropData1" ReturnType="Collection(dbFarmerScheme3Model.sp_getCropData1_Result)" />
-    <FunctionImport Name="sp_approveBid">
-      <Parameter Name="bid" Mode="In" Type="Int32" />
-      <Parameter Name="cropid" Mode="In" Type="Int32" />
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="sp_approveBidder">
-      <Parameter Name="bid" Mode="In" Type="Int32" />
-      <Parameter Name="admin" Mode="In" Type="String" />
-      <Parameter Name="adate" Mode="In" Type="DateTime" />
-      <Parameter Name="pass" Mode="In" Type="String" />
-      <Parameter Name="email" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_approveFarmer">
-      <Parameter Name="fid" Mode="In" Type="Int32" />
-      <Parameter Name="admin" Mode="In" Type="String" />
-      <Parameter Name="aDate" Mode="In" Type="DateTime" />
-      <Parameter Name="pass" Mode="In" Type="String" />
-      <Parameter Name="email" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_approvesale">
-      <Parameter Name="cropid" Mode="In" Type="Int32" />
-      <Parameter Name="cropType" Mode="In" Type="String" />
-      <Parameter Name="cropname" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="proc_checkexpiredateofclaim" ReturnType="Collection(Int32)">
-      <Parameter Name="policy" Mode="In" Type="Int32" />
-      <Parameter Name="dateofinsuranceapp" Mode="In" Type="DateTime" />
-      <Parameter Name="dateofloss" Mode="In" Type="DateTime" />
-      <Parameter Name="fid" Mode="In" Type="Int32" />
-      <Parameter Name="croptype" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="sp_getClaimData" ReturnType="Collection(dbFarmerScheme3Model.sp_getClaimData_Result)" />
+    <FunctionImport Name="sp_upgraddiagrams" />
   </EntityContainer>
   <ComplexType Name="sp_getCropData_Result">
     <Property Type="Int32" Name="CropId" Nullable="false" />
@@ -465,22 +432,25 @@
     <Property Type="Double" Name="Quantity" Nullable="false" />
     <Property Type="String" Name="FertilizerType" Nullable="false" MaxLength="20" />
     <Property Type="String" Name="SoilPhCertificate" Nullable="false" MaxLength="200" />
-    <Property Type="DateTime" Name="DateOfSoldCrop" Nullable="true" />
+    <Property Type="DateTime" Name="DateOfRequestForSell" Nullable="true" />
     <Property Type="Decimal" Name="MSP" Nullable="true" Precision="19" />
     <Property Type="Decimal" Name="SoldPrice" Nullable="true" Precision="19" />
     <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="19" />
     <Property Type="String" Name="StatusOfCropSaleReq" Nullable="true" MaxLength="20" />
   </ComplexType>
-  <ComplexType Name="sp_helpdiagramdefinition_Result">
-    <Property Type="Int32" Name="version" Nullable="true" />
-    <Property Type="Binary" Name="definition" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="sp_helpdiagrams_Result">
-    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="ID" Nullable="false" />
-    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  <ComplexType Name="sp_getCropData1_Result">
+    <Property Type="Int32" Name="CropId" Nullable="false" />
+    <Property Type="Int32" Name="FarmerId" Nullable="true" />
+    <Property Type="String" Name="CropType" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="CropName" Nullable="false" MaxLength="20" />
+    <Property Type="Double" Name="Quantity" Nullable="false" />
+    <Property Type="String" Name="FertilizerType" Nullable="false" MaxLength="20" />
+    <Property Type="String" Name="SoilPhCertificate" Nullable="false" MaxLength="200" />
+    <Property Type="DateTime" Name="DateOfRequestForSell" Nullable="true" />
+    <Property Type="Decimal" Name="MSP" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="SoldPrice" Nullable="true" Precision="19" />
+    <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="19" />
+    <Property Type="String" Name="StatusOfCropSaleReq" Nullable="true" MaxLength="20" />
   </ComplexType>
   <ComplexType Name="sp_getPendingBidders_Result">
     <Property Type="Int32" Name="bId" Nullable="false" />
@@ -539,34 +509,21 @@
     <Property Type="Double" Name="Quantity" Nullable="false" />
     <Property Type="String" Name="FertilizerType" Nullable="false" MaxLength="20" />
     <Property Type="String" Name="SoilPhCertificate" Nullable="false" MaxLength="200" />
-    <Property Type="DateTime" Name="DateOfSoldCrop" Nullable="true" />
-    <Property Type="Decimal" Name="MSP" Nullable="true" Precision="19" />
-    <Property Type="Decimal" Name="SoldPrice" Nullable="true" Precision="19" />
-    <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="19" />
-    <Property Type="String" Name="StatusOfCropSaleReq" Nullable="true" MaxLength="20" />
-  </ComplexType>
-  <ComplexType Name="sp_getCropData1_Result">
-    <Property Type="Int32" Name="CropId" Nullable="false" />
-    <Property Type="Int32" Name="FarmerId" Nullable="true" />
-    <Property Type="String" Name="CropType" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="CropName" Nullable="false" MaxLength="20" />
-    <Property Type="Double" Name="Quantity" Nullable="false" />
-    <Property Type="String" Name="FertilizerType" Nullable="false" MaxLength="20" />
-    <Property Type="String" Name="SoilPhCertificate" Nullable="false" MaxLength="200" />
     <Property Type="DateTime" Name="DateOfRequestForSell" Nullable="true" />
     <Property Type="Decimal" Name="MSP" Nullable="true" Precision="19" />
     <Property Type="Decimal" Name="SoldPrice" Nullable="true" Precision="19" />
     <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="19" />
     <Property Type="String" Name="StatusOfCropSaleReq" Nullable="true" MaxLength="20" />
   </ComplexType>
-  <ComplexType Name="sp_getClaimData_Result">
-    <Property Type="Int64" Name="InsuranceApplicationId" Nullable="false" />
-    <Property Type="String" Name="croptype" Nullable="true" MaxLength="10" />
-    <Property Type="String" Name="cropname" Nullable="false" MaxLength="10" />
-    <Property Type="Decimal" Name="SumInsuredPerHectare" Nullable="true" Precision="19" />
-    <Property Type="DateTime" Name="dateofapplication" Nullable="true" />
-    <Property Type="DateTime" Name="dateofloss" Nullable="false" />
-    <Property Type="Double" Name="area" Nullable="false" />
-    <Property Type="String" Name="causeofloss" Nullable="false" MaxLength="100" />
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
 </Schema>

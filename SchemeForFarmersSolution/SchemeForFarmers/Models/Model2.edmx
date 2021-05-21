@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="dbFarmerScheme3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="dbFarmerScheme3Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -89,7 +89,6 @@
           <Property Name="SoldPrice" Type="money" />
           <Property Name="TotalPrice" Type="money" />
           <Property Name="StatusOfCropSaleReq" Type="varchar" MaxLength="20" />
-          <Property Name="DateOfSoldCrop" Type="date" />
         </EntityType>
         <EntityType Name="tblFarmer">
           <Key>
@@ -127,7 +126,6 @@
           <Property Name="CropName" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Area" Type="float" Nullable="false" />
           <Property Name="SumInsuredPerHectare" Type="money" />
-          <Property Name="DateofApplication" Type="date" />
         </EntityType>
         <EntityType Name="tblInsuranceClaim">
           <Key>
@@ -297,41 +295,11 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="proc_checkexpiredateofclaim" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="policy" Type="int" Mode="In" />
-          <Parameter Name="dateofinsuranceapp" Type="date" Mode="In" />
-          <Parameter Name="dateofloss" Type="date" Mode="In" />
-          <Parameter Name="fid" Type="int" Mode="In" />
-          <Parameter Name="croptype" Type="varchar" Mode="In" />
-        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
           <Parameter Name="version" Type="int" Mode="In" />
           <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_approveBid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="bid" Type="int" Mode="In" />
-          <Parameter Name="cropid" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_approveBidder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="bid" Type="int" Mode="In" />
-          <Parameter Name="admin" Type="varchar" Mode="In" />
-          <Parameter Name="adate" Type="date" Mode="In" />
-          <Parameter Name="pass" Type="varchar" Mode="In" />
-          <Parameter Name="email" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="sp_approveFarmer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="fid" Type="int" Mode="In" />
-          <Parameter Name="admin" Type="varchar" Mode="In" />
-          <Parameter Name="aDate" Type="date" Mode="In" />
-          <Parameter Name="pass" Type="varchar" Mode="In" />
-          <Parameter Name="email" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="sp_approvesale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="cropid" Type="int" Mode="In" />
-          <Parameter Name="cropType" Type="varchar" Mode="In" />
-          <Parameter Name="cropname" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -343,7 +311,6 @@
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
         </Function>
-        <Function Name="sp_getClaimData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_getCropData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_getCropData1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_GetMAxBidAmount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -379,7 +346,7 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="dbFarmerScheme3ModelStoreContainer">
+        <EntityContainer Name="dbFarmerScheme3Model1StoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBidCrops" EntityType="Self.tblBidCrops" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblBidder" EntityType="Self.tblBidder" Schema="dbo" store:Type="Tables" />
@@ -439,10 +406,11 @@
             <End Role="tblUser" EntitySet="tblUser" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="dbFarmerScheme3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="dbFarmerScheme3Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -533,6 +501,7 @@
           <Property Name="Quantity" Type="Double" Nullable="false" />
           <Property Name="FertilizerType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SoilPhCertificate" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateOfRequestForSell" Type="DateTime" Precision="0" />
           <Property Name="MSP" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="SoldPrice" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="TotalPrice" Type="Decimal" Precision="19" Scale="4" />
@@ -541,8 +510,6 @@
           <NavigationProperty Name="tblBids" Relationship="Self.fk_cb" FromRole="tblCropForSale" ToRole="tblBids" />
           <NavigationProperty Name="tblCropDetails" Relationship="Self.fk_cc" FromRole="tblCropForSale" ToRole="tblCropDetails" />
           <NavigationProperty Name="tblFarmer" Relationship="Self.fk_fc" FromRole="tblCropForSale" ToRole="tblFarmer" />
-          <Property Name="DateOfRequestForSell" Type="DateTime" Precision="0" />
-          <Property Name="DateOfSoldCrop" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="tblFarmer">
           <Key>
@@ -586,7 +553,6 @@
           <Property Name="SumInsuredPerHectare" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="tblFarmer" Relationship="Self.fk_fi" FromRole="tblInsurance" ToRole="tblFarmer" />
           <NavigationProperty Name="tblInsuranceClaims" Relationship="Self.fk_ii" FromRole="tblInsurance" ToRole="tblInsuranceClaim" />
-          <Property Name="DateofApplication" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="tblInsuranceClaim">
           <Key>
@@ -758,7 +724,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dbFarmerScheme3Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="dbFarmerScheme3Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="tblBidCrops" EntityType="Self.tblBidCrop" />
           <EntitySet Name="tblBidders" EntityType="Self.tblBidder" />
@@ -833,26 +799,22 @@
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_getCropData" ReturnType="Collection(dbFarmerScheme3Model.sp_getCropData_Result)" />
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(dbFarmerScheme3Model.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(dbFarmerScheme3Model.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="sp_newBid">
+          <FunctionImport Name="sp_getCropData" ReturnType="Collection(dbFarmerScheme3Model1.sp_getCropData_Result)" />
+          <FunctionImport Name="sp_getCropData1" ReturnType="Collection(dbFarmerScheme3Model1.sp_getCropData1_Result)" />
+          <FunctionImport Name="sp_GetMAxBidAmount" ReturnType="Collection(Decimal)">
             <Parameter Name="cropid" Mode="In" Type="Int32" />
-            <Parameter Name="bidderid" Mode="In" Type="Int32" />
-            <Parameter Name="bidamt" Mode="In" Type="Decimal" />
-            <Parameter Name="dateofbid" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="sp_getPendingBidders" ReturnType="Collection(dbFarmerScheme3Model1.sp_getPendingBidders_Result)" />
+          <FunctionImport Name="sp_getpendingbids" ReturnType="Collection(dbFarmerScheme3Model1.sp_getpendingbids_Result)" />
+          <FunctionImport Name="sp_getPendingFarmers" ReturnType="Collection(dbFarmerScheme3Model1.sp_getPendingFarmers_Result)" />
+          <FunctionImport Name="sp_getPendingSaleData" ReturnType="Collection(dbFarmerScheme3Model1.sp_getPendingSaleData_Result)" />
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(dbFarmerScheme3Model1.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(dbFarmerScheme3Model1.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_InsertintoBidCrops">
             <Parameter Name="bidId" Mode="In" Type="Int32" />
@@ -860,45 +822,18 @@
             <Parameter Name="CropId" Mode="In" Type="Int32" />
             <Parameter Name="BidderId" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_GetMAxBidAmount" ReturnType="Collection(Decimal)">
-          <Parameter Name="cropid" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_getPendingBidders" ReturnType="Collection(dbFarmerScheme3Model.sp_getPendingBidders_Result)" />
-          <FunctionImport Name="sp_getpendingbids" ReturnType="Collection(dbFarmerScheme3Model.sp_getpendingbids_Result)" />
-          <FunctionImport Name="sp_getPendingFarmers" ReturnType="Collection(dbFarmerScheme3Model.sp_getPendingFarmers_Result)" />
-          <FunctionImport Name="sp_getPendingSaleData" ReturnType="Collection(dbFarmerScheme3Model.sp_getPendingSaleData_Result)" />
-          <FunctionImport Name="sp_getCropData1" ReturnType="Collection(dbFarmerScheme3Model.sp_getCropData1_Result)" />
-          <FunctionImport Name="sp_approveBid">
-            <Parameter Name="bid" Mode="In" Type="Int32" />
+          <FunctionImport Name="sp_newBid">
             <Parameter Name="cropid" Mode="In" Type="Int32" />
+            <Parameter Name="bidderid" Mode="In" Type="Int32" />
+            <Parameter Name="bidamt" Mode="In" Type="Decimal" />
+            <Parameter Name="dateofbid" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <FunctionImport Name="sp_approveBidder">
-            <Parameter Name="bid" Mode="In" Type="Int32" />
-            <Parameter Name="admin" Mode="In" Type="String" />
-            <Parameter Name="adate" Mode="In" Type="DateTime" />
-            <Parameter Name="pass" Mode="In" Type="String" />
-            <Parameter Name="email" Mode="In" Type="String" />
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="sp_approveFarmer">
-            <Parameter Name="fid" Mode="In" Type="Int32" />
-            <Parameter Name="admin" Mode="In" Type="String" />
-            <Parameter Name="aDate" Mode="In" Type="DateTime" />
-            <Parameter Name="pass" Mode="In" Type="String" />
-            <Parameter Name="email" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_approvesale">
-            <Parameter Name="cropid" Mode="In" Type="Int32" />
-            <Parameter Name="cropType" Mode="In" Type="String" />
-            <Parameter Name="cropname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="proc_checkexpiredateofclaim" ReturnType="Collection(Int32)">
-            <Parameter Name="policy" Mode="In" Type="Int32" />
-            <Parameter Name="dateofinsuranceapp" Mode="In" Type="DateTime" />
-            <Parameter Name="dateofloss" Mode="In" Type="DateTime" />
-            <Parameter Name="fid" Mode="In" Type="Int32" />
-            <Parameter Name="croptype" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_getClaimData" ReturnType="Collection(dbFarmerScheme3Model.sp_getClaimData_Result)" />
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
         <ComplexType Name="sp_getCropData_Result">
           <Property Type="Int32" Name="CropId" Nullable="false" />
@@ -908,22 +843,25 @@
           <Property Type="Double" Name="Quantity" Nullable="false" />
           <Property Type="String" Name="FertilizerType" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="SoilPhCertificate" Nullable="false" MaxLength="200" />
-          <Property Type="DateTime" Name="DateOfSoldCrop" Nullable="true" />
+          <Property Type="DateTime" Name="DateOfRequestForSell" Nullable="true" />
           <Property Type="Decimal" Name="MSP" Nullable="true" Precision="19" />
           <Property Type="Decimal" Name="SoldPrice" Nullable="true" Precision="19" />
           <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="19" />
           <Property Type="String" Name="StatusOfCropSaleReq" Nullable="true" MaxLength="20" />
         </ComplexType>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        <ComplexType Name="sp_getCropData1_Result">
+          <Property Type="Int32" Name="CropId" Nullable="false" />
+          <Property Type="Int32" Name="FarmerId" Nullable="true" />
+          <Property Type="String" Name="CropType" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="CropName" Nullable="false" MaxLength="20" />
+          <Property Type="Double" Name="Quantity" Nullable="false" />
+          <Property Type="String" Name="FertilizerType" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="SoilPhCertificate" Nullable="false" MaxLength="200" />
+          <Property Type="DateTime" Name="DateOfRequestForSell" Nullable="true" />
+          <Property Type="Decimal" Name="MSP" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="SoldPrice" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="19" />
+          <Property Type="String" Name="StatusOfCropSaleReq" Nullable="true" MaxLength="20" />
         </ComplexType>
         <ComplexType Name="sp_getPendingBidders_Result">
           <Property Type="Int32" Name="bId" Nullable="false" />
@@ -982,44 +920,31 @@
           <Property Type="Double" Name="Quantity" Nullable="false" />
           <Property Type="String" Name="FertilizerType" Nullable="false" MaxLength="20" />
           <Property Type="String" Name="SoilPhCertificate" Nullable="false" MaxLength="200" />
-          <Property Type="DateTime" Name="DateOfSoldCrop" Nullable="true" />
-          <Property Type="Decimal" Name="MSP" Nullable="true" Precision="19" />
-          <Property Type="Decimal" Name="SoldPrice" Nullable="true" Precision="19" />
-          <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="19" />
-          <Property Type="String" Name="StatusOfCropSaleReq" Nullable="true" MaxLength="20" />
-        </ComplexType>
-        <ComplexType Name="sp_getCropData1_Result">
-          <Property Type="Int32" Name="CropId" Nullable="false" />
-          <Property Type="Int32" Name="FarmerId" Nullable="true" />
-          <Property Type="String" Name="CropType" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="CropName" Nullable="false" MaxLength="20" />
-          <Property Type="Double" Name="Quantity" Nullable="false" />
-          <Property Type="String" Name="FertilizerType" Nullable="false" MaxLength="20" />
-          <Property Type="String" Name="SoilPhCertificate" Nullable="false" MaxLength="200" />
           <Property Type="DateTime" Name="DateOfRequestForSell" Nullable="true" />
           <Property Type="Decimal" Name="MSP" Nullable="true" Precision="19" />
           <Property Type="Decimal" Name="SoldPrice" Nullable="true" Precision="19" />
           <Property Type="Decimal" Name="TotalPrice" Nullable="true" Precision="19" />
           <Property Type="String" Name="StatusOfCropSaleReq" Nullable="true" MaxLength="20" />
         </ComplexType>
-        <ComplexType Name="sp_getClaimData_Result">
-          <Property Type="Int64" Name="InsuranceApplicationId" Nullable="false" />
-          <Property Type="String" Name="croptype" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="cropname" Nullable="false" MaxLength="10" />
-          <Property Type="Decimal" Name="SumInsuredPerHectare" Nullable="true" Precision="19" />
-          <Property Type="DateTime" Name="dateofapplication" Nullable="true" />
-          <Property Type="DateTime" Name="dateofloss" Nullable="false" />
-          <Property Type="Double" Name="area" Nullable="false" />
-          <Property Type="String" Name="causeofloss" Nullable="false" MaxLength="100" />
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dbFarmerScheme3ModelStoreContainer" CdmEntityContainer="dbFarmerScheme3Entities">
+        <EntityContainerMapping StorageEntityContainer="dbFarmerScheme3Model1StoreContainer" CdmEntityContainer="dbFarmerScheme3Entities1">
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="dbFarmerScheme3Model.sysdiagram">
+            <EntityTypeMapping TypeName="dbFarmerScheme3Model1.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -1030,7 +955,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblBidCrops">
-            <EntityTypeMapping TypeName="dbFarmerScheme3Model.tblBidCrop">
+            <EntityTypeMapping TypeName="dbFarmerScheme3Model1.tblBidCrop">
               <MappingFragment StoreEntitySet="tblBidCrops">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="bidId" ColumnName="bidId" />
@@ -1044,7 +969,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblBidders">
-            <EntityTypeMapping TypeName="dbFarmerScheme3Model.tblBidder">
+            <EntityTypeMapping TypeName="dbFarmerScheme3Model1.tblBidder">
               <MappingFragment StoreEntitySet="tblBidder">
                 <ScalarProperty Name="bId" ColumnName="bId" />
                 <ScalarProperty Name="bUserName" ColumnName="bUserName" />
@@ -1067,7 +992,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblBids">
-            <EntityTypeMapping TypeName="dbFarmerScheme3Model.tblBid">
+            <EntityTypeMapping TypeName="dbFarmerScheme3Model1.tblBid">
               <MappingFragment StoreEntitySet="tblBids">
                 <ScalarProperty Name="bId" ColumnName="bId" />
                 <ScalarProperty Name="CropId" ColumnName="CropId" />
@@ -1079,7 +1004,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblCropDetails">
-            <EntityTypeMapping TypeName="dbFarmerScheme3Model.tblCropDetail">
+            <EntityTypeMapping TypeName="dbFarmerScheme3Model1.tblCropDetail">
               <MappingFragment StoreEntitySet="tblCropDetails">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CropId" ColumnName="CropId" />
@@ -1092,10 +1017,8 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblCropForSales">
-            <EntityTypeMapping TypeName="dbFarmerScheme3Model.tblCropForSale">
+            <EntityTypeMapping TypeName="dbFarmerScheme3Model1.tblCropForSale">
               <MappingFragment StoreEntitySet="tblCropForSale">
-                <ScalarProperty Name="DateOfSoldCrop" ColumnName="DateOfSoldCrop" />
-                <ScalarProperty Name="DateOfRequestForSell" ColumnName="DateOfRequestForSell" />
                 <ScalarProperty Name="CropId" ColumnName="CropId" />
                 <ScalarProperty Name="FarmerId" ColumnName="FarmerId" />
                 <ScalarProperty Name="CropType" ColumnName="CropType" />
@@ -1103,6 +1026,7 @@
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="FertilizerType" ColumnName="FertilizerType" />
                 <ScalarProperty Name="SoilPhCertificate" ColumnName="SoilPhCertificate" />
+                <ScalarProperty Name="DateOfRequestForSell" ColumnName="DateOfRequestForSell" />
                 <ScalarProperty Name="MSP" ColumnName="MSP" />
                 <ScalarProperty Name="SoldPrice" ColumnName="SoldPrice" />
                 <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
@@ -1111,7 +1035,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblFarmers">
-            <EntityTypeMapping TypeName="dbFarmerScheme3Model.tblFarmer">
+            <EntityTypeMapping TypeName="dbFarmerScheme3Model1.tblFarmer">
               <MappingFragment StoreEntitySet="tblFarmer">
                 <ScalarProperty Name="fId" ColumnName="fId" />
                 <ScalarProperty Name="fUserName" ColumnName="fUserName" />
@@ -1137,9 +1061,8 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblInsurances">
-            <EntityTypeMapping TypeName="dbFarmerScheme3Model.tblInsurance">
+            <EntityTypeMapping TypeName="dbFarmerScheme3Model1.tblInsurance">
               <MappingFragment StoreEntitySet="tblInsurance">
-                <ScalarProperty Name="DateofApplication" ColumnName="DateofApplication" />
                 <ScalarProperty Name="InsuranceApplicationId" ColumnName="InsuranceApplicationId" />
                 <ScalarProperty Name="FarmerId" ColumnName="FarmerId" />
                 <ScalarProperty Name="CropType" ColumnName="CropType" />
@@ -1151,7 +1074,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblInsuranceClaims">
-            <EntityTypeMapping TypeName="dbFarmerScheme3Model.tblInsuranceClaim">
+            <EntityTypeMapping TypeName="dbFarmerScheme3Model1.tblInsuranceClaim">
               <MappingFragment StoreEntitySet="tblInsuranceClaim">
                 <ScalarProperty Name="InsuranceId" ColumnName="InsuranceId" />
                 <ScalarProperty Name="Policyno" ColumnName="Policyno" />
@@ -1165,7 +1088,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblUsers">
-            <EntityTypeMapping TypeName="dbFarmerScheme3Model.tblUser">
+            <EntityTypeMapping TypeName="dbFarmerScheme3Model1.tblUser">
               <MappingFragment StoreEntitySet="tblUser">
                 <ScalarProperty Name="EmailId" ColumnName="EmailId" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -1175,12 +1098,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="dbFarmerScheme3Model.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="dbFarmerScheme3Model.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="dbFarmerScheme3Model.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_getCropData" FunctionName="dbFarmerScheme3Model.Store.sp_getCropData">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="dbFarmerScheme3Model1.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="dbFarmerScheme3Model1.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="dbFarmerScheme3Model1.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_getCropData" FunctionName="dbFarmerScheme3Model1.Store.sp_getCropData">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="dbFarmerScheme3Model.sp_getCropData_Result">
+              <ComplexTypeMapping TypeName="dbFarmerScheme3Model1.sp_getCropData_Result">
                 <ScalarProperty Name="CropId" ColumnName="CropId" />
                 <ScalarProperty Name="FarmerId" ColumnName="FarmerId" />
                 <ScalarProperty Name="CropType" ColumnName="CropType" />
@@ -1188,7 +1111,7 @@
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="FertilizerType" ColumnName="FertilizerType" />
                 <ScalarProperty Name="SoilPhCertificate" ColumnName="SoilPhCertificate" />
-                <ScalarProperty Name="DateOfSoldCrop" ColumnName="DateOfSoldCrop" />
+                <ScalarProperty Name="DateOfRequestForSell" ColumnName="DateOfRequestForSell" />
                 <ScalarProperty Name="MSP" ColumnName="MSP" />
                 <ScalarProperty Name="SoldPrice" ColumnName="SoldPrice" />
                 <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
@@ -1196,33 +1119,28 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="dbFarmerScheme3Model.Store.sp_helpdiagramdefinition">
+          <FunctionImportMapping FunctionImportName="sp_getCropData1" FunctionName="dbFarmerScheme3Model1.Store.sp_getCropData1">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="dbFarmerScheme3Model.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
+              <ComplexTypeMapping TypeName="dbFarmerScheme3Model1.sp_getCropData1_Result">
+                <ScalarProperty Name="CropId" ColumnName="CropId" />
+                <ScalarProperty Name="FarmerId" ColumnName="FarmerId" />
+                <ScalarProperty Name="CropType" ColumnName="CropType" />
+                <ScalarProperty Name="CropName" ColumnName="CropName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="FertilizerType" ColumnName="FertilizerType" />
+                <ScalarProperty Name="SoilPhCertificate" ColumnName="SoilPhCertificate" />
+                <ScalarProperty Name="DateOfRequestForSell" ColumnName="DateOfRequestForSell" />
+                <ScalarProperty Name="MSP" ColumnName="MSP" />
+                <ScalarProperty Name="SoldPrice" ColumnName="SoldPrice" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="StatusOfCropSaleReq" ColumnName="StatusOfCropSaleReq" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="dbFarmerScheme3Model.Store.sp_helpdiagrams">
+          <FunctionImportMapping FunctionImportName="sp_GetMAxBidAmount" FunctionName="dbFarmerScheme3Model1.Store.sp_GetMAxBidAmount" />
+          <FunctionImportMapping FunctionImportName="sp_getPendingBidders" FunctionName="dbFarmerScheme3Model1.Store.sp_getPendingBidders">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="dbFarmerScheme3Model.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="dbFarmerScheme3Model.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="dbFarmerScheme3Model.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="sp_newBid" FunctionName="dbFarmerScheme3Model.Store.sp_newBid" />
-          <FunctionImportMapping FunctionImportName="sp_InsertintoBidCrops" FunctionName="dbFarmerScheme3Model.Store.sp_InsertintoBidCrops" />
-          <FunctionImportMapping FunctionImportName="sp_GetMAxBidAmount" FunctionName="dbFarmerScheme3Model.Store.sp_GetMAxBidAmount" />
-          <FunctionImportMapping FunctionImportName="sp_getPendingBidders" FunctionName="dbFarmerScheme3Model.Store.sp_getPendingBidders">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="dbFarmerScheme3Model.sp_getPendingBidders_Result">
+              <ComplexTypeMapping TypeName="dbFarmerScheme3Model1.sp_getPendingBidders_Result">
                 <ScalarProperty Name="bId" ColumnName="bId" />
                 <ScalarProperty Name="bUserName" ColumnName="bUserName" />
                 <ScalarProperty Name="bContactNo" ColumnName="bContactNo" />
@@ -1243,9 +1161,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_getpendingbids" FunctionName="dbFarmerScheme3Model.Store.sp_getpendingbids">
+          <FunctionImportMapping FunctionImportName="sp_getpendingbids" FunctionName="dbFarmerScheme3Model1.Store.sp_getpendingbids">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="dbFarmerScheme3Model.sp_getpendingbids_Result">
+              <ComplexTypeMapping TypeName="dbFarmerScheme3Model1.sp_getpendingbids_Result">
                 <ScalarProperty Name="bId" ColumnName="bId" />
                 <ScalarProperty Name="CropId" ColumnName="CropId" />
                 <ScalarProperty Name="BidderId" ColumnName="BidderId" />
@@ -1255,9 +1173,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_getPendingFarmers" FunctionName="dbFarmerScheme3Model.Store.sp_getPendingFarmers">
+          <FunctionImportMapping FunctionImportName="sp_getPendingFarmers" FunctionName="dbFarmerScheme3Model1.Store.sp_getPendingFarmers">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="dbFarmerScheme3Model.sp_getPendingFarmers_Result">
+              <ComplexTypeMapping TypeName="dbFarmerScheme3Model1.sp_getPendingFarmers_Result">
                 <ScalarProperty Name="fId" ColumnName="fId" />
                 <ScalarProperty Name="fUserName" ColumnName="fUserName" />
                 <ScalarProperty Name="fContactNo" ColumnName="fContactNo" />
@@ -1281,27 +1199,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_getPendingSaleData" FunctionName="dbFarmerScheme3Model.Store.sp_getPendingSaleData">
+          <FunctionImportMapping FunctionImportName="sp_getPendingSaleData" FunctionName="dbFarmerScheme3Model1.Store.sp_getPendingSaleData">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="dbFarmerScheme3Model.sp_getPendingSaleData_Result">
-                <ScalarProperty Name="CropId" ColumnName="CropId" />
-                <ScalarProperty Name="FarmerId" ColumnName="FarmerId" />
-                <ScalarProperty Name="CropType" ColumnName="CropType" />
-                <ScalarProperty Name="CropName" ColumnName="CropName" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="FertilizerType" ColumnName="FertilizerType" />
-                <ScalarProperty Name="SoilPhCertificate" ColumnName="SoilPhCertificate" />
-                <ScalarProperty Name="DateOfSoldCrop" ColumnName="DateOfSoldCrop" />
-                <ScalarProperty Name="MSP" ColumnName="MSP" />
-                <ScalarProperty Name="SoldPrice" ColumnName="SoldPrice" />
-                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
-                <ScalarProperty Name="StatusOfCropSaleReq" ColumnName="StatusOfCropSaleReq" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_getCropData1" FunctionName="dbFarmerScheme3Model.Store.sp_getCropData1">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="dbFarmerScheme3Model.sp_getCropData1_Result">
+              <ComplexTypeMapping TypeName="dbFarmerScheme3Model1.sp_getPendingSaleData_Result">
                 <ScalarProperty Name="CropId" ColumnName="CropId" />
                 <ScalarProperty Name="FarmerId" ColumnName="FarmerId" />
                 <ScalarProperty Name="CropType" ColumnName="CropType" />
@@ -1317,25 +1217,29 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_approveBid" FunctionName="dbFarmerScheme3Model.Store.sp_approveBid" />
-          <FunctionImportMapping FunctionImportName="sp_approveBidder" FunctionName="dbFarmerScheme3Model.Store.sp_approveBidder" />
-          <FunctionImportMapping FunctionImportName="sp_approveFarmer" FunctionName="dbFarmerScheme3Model.Store.sp_approveFarmer" />
-          <FunctionImportMapping FunctionImportName="sp_approvesale" FunctionName="dbFarmerScheme3Model.Store.sp_approvesale" />
-          <FunctionImportMapping FunctionImportName="proc_checkexpiredateofclaim" FunctionName="dbFarmerScheme3Model.Store.proc_checkexpiredateofclaim" />
-          <FunctionImportMapping FunctionImportName="sp_getClaimData" FunctionName="dbFarmerScheme3Model.Store.sp_getClaimData">
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="dbFarmerScheme3Model1.Store.sp_helpdiagramdefinition">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="dbFarmerScheme3Model.sp_getClaimData_Result">
-                <ScalarProperty Name="InsuranceApplicationId" ColumnName="InsuranceApplicationId" />
-                <ScalarProperty Name="croptype" ColumnName="croptype" />
-                <ScalarProperty Name="cropname" ColumnName="cropname" />
-                <ScalarProperty Name="SumInsuredPerHectare" ColumnName="SumInsuredPerHectare" />
-                <ScalarProperty Name="dateofapplication" ColumnName="dateofapplication" />
-                <ScalarProperty Name="dateofloss" ColumnName="dateofloss" />
-                <ScalarProperty Name="area" ColumnName="area" />
-                <ScalarProperty Name="causeofloss" ColumnName="causeofloss" />
+              <ComplexTypeMapping TypeName="dbFarmerScheme3Model1.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="dbFarmerScheme3Model1.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dbFarmerScheme3Model1.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_InsertintoBidCrops" FunctionName="dbFarmerScheme3Model1.Store.sp_InsertintoBidCrops" />
+          <FunctionImportMapping FunctionImportName="sp_newBid" FunctionName="dbFarmerScheme3Model1.Store.sp_newBid" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="dbFarmerScheme3Model1.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="dbFarmerScheme3Model1.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

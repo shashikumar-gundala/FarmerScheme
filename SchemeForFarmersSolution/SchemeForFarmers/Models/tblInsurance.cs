@@ -27,6 +27,7 @@ namespace SchemeForFarmers.Models
         public string CropName { get; set; }
         public double Area { get; set; }
         public Nullable<decimal> SumInsuredPerHectare { get; set; }
+        public Nullable<System.DateTime> DateofApplication { get; set; }
     
         public virtual tblFarmer tblFarmer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

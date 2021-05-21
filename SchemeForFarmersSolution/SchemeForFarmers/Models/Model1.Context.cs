@@ -196,5 +196,140 @@ namespace SchemeForFarmers.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("sp_GetMAxBidAmount", cropidParameter);
         }
+    
+        public virtual ObjectResult<sp_getPendingBidders_Result> sp_getPendingBidders()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getPendingBidders_Result>("sp_getPendingBidders");
+        }
+    
+        public virtual ObjectResult<sp_getpendingbids_Result> sp_getpendingbids()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getpendingbids_Result>("sp_getpendingbids");
+        }
+    
+        public virtual ObjectResult<sp_getPendingFarmers_Result> sp_getPendingFarmers()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getPendingFarmers_Result>("sp_getPendingFarmers");
+        }
+    
+        public virtual ObjectResult<sp_getPendingSaleData_Result> sp_getPendingSaleData()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getPendingSaleData_Result>("sp_getPendingSaleData");
+        }
+    
+        public virtual ObjectResult<sp_getCropData1_Result> sp_getCropData1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getCropData1_Result>("sp_getCropData1");
+        }
+    
+        public virtual int sp_approveBid(Nullable<int> bid, Nullable<int> cropid)
+        {
+            var bidParameter = bid.HasValue ?
+                new ObjectParameter("bid", bid) :
+                new ObjectParameter("bid", typeof(int));
+    
+            var cropidParameter = cropid.HasValue ?
+                new ObjectParameter("cropid", cropid) :
+                new ObjectParameter("cropid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_approveBid", bidParameter, cropidParameter);
+        }
+    
+        public virtual int sp_approveBidder(Nullable<int> bid, string admin, Nullable<System.DateTime> adate, string pass, string email)
+        {
+            var bidParameter = bid.HasValue ?
+                new ObjectParameter("bid", bid) :
+                new ObjectParameter("bid", typeof(int));
+    
+            var adminParameter = admin != null ?
+                new ObjectParameter("admin", admin) :
+                new ObjectParameter("admin", typeof(string));
+    
+            var adateParameter = adate.HasValue ?
+                new ObjectParameter("adate", adate) :
+                new ObjectParameter("adate", typeof(System.DateTime));
+    
+            var passParameter = pass != null ?
+                new ObjectParameter("pass", pass) :
+                new ObjectParameter("pass", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_approveBidder", bidParameter, adminParameter, adateParameter, passParameter, emailParameter);
+        }
+    
+        public virtual int sp_approveFarmer(Nullable<int> fid, string admin, Nullable<System.DateTime> aDate, string pass, string email)
+        {
+            var fidParameter = fid.HasValue ?
+                new ObjectParameter("fid", fid) :
+                new ObjectParameter("fid", typeof(int));
+    
+            var adminParameter = admin != null ?
+                new ObjectParameter("admin", admin) :
+                new ObjectParameter("admin", typeof(string));
+    
+            var aDateParameter = aDate.HasValue ?
+                new ObjectParameter("aDate", aDate) :
+                new ObjectParameter("aDate", typeof(System.DateTime));
+    
+            var passParameter = pass != null ?
+                new ObjectParameter("pass", pass) :
+                new ObjectParameter("pass", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_approveFarmer", fidParameter, adminParameter, aDateParameter, passParameter, emailParameter);
+        }
+    
+        public virtual int sp_approvesale(Nullable<int> cropid, string cropType, string cropname)
+        {
+            var cropidParameter = cropid.HasValue ?
+                new ObjectParameter("cropid", cropid) :
+                new ObjectParameter("cropid", typeof(int));
+    
+            var cropTypeParameter = cropType != null ?
+                new ObjectParameter("cropType", cropType) :
+                new ObjectParameter("cropType", typeof(string));
+    
+            var cropnameParameter = cropname != null ?
+                new ObjectParameter("cropname", cropname) :
+                new ObjectParameter("cropname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_approvesale", cropidParameter, cropTypeParameter, cropnameParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> proc_checkexpiredateofclaim(Nullable<int> policy, Nullable<System.DateTime> dateofinsuranceapp, Nullable<System.DateTime> dateofloss, Nullable<int> fid, string croptype)
+        {
+            var policyParameter = policy.HasValue ?
+                new ObjectParameter("policy", policy) :
+                new ObjectParameter("policy", typeof(int));
+    
+            var dateofinsuranceappParameter = dateofinsuranceapp.HasValue ?
+                new ObjectParameter("dateofinsuranceapp", dateofinsuranceapp) :
+                new ObjectParameter("dateofinsuranceapp", typeof(System.DateTime));
+    
+            var dateoflossParameter = dateofloss.HasValue ?
+                new ObjectParameter("dateofloss", dateofloss) :
+                new ObjectParameter("dateofloss", typeof(System.DateTime));
+    
+            var fidParameter = fid.HasValue ?
+                new ObjectParameter("fid", fid) :
+                new ObjectParameter("fid", typeof(int));
+    
+            var croptypeParameter = croptype != null ?
+                new ObjectParameter("croptype", croptype) :
+                new ObjectParameter("croptype", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("proc_checkexpiredateofclaim", policyParameter, dateofinsuranceappParameter, dateoflossParameter, fidParameter, croptypeParameter);
+        }
+    
+        public virtual ObjectResult<sp_getClaimData_Result> sp_getClaimData()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getClaimData_Result>("sp_getClaimData");
+        }
     }
 }

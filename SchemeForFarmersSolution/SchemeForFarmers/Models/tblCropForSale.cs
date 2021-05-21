@@ -29,11 +29,12 @@ namespace SchemeForFarmers.Models
         public double Quantity { get; set; }
         public string FertilizerType { get; set; }
         public string SoilPhCertificate { get; set; }
-        public Nullable<System.DateTime> DateOfSoldCrop { get; set; }
         public Nullable<decimal> MSP { get; set; }
         public Nullable<decimal> SoldPrice { get; set; }
         public Nullable<decimal> TotalPrice { get; set; }
         public string StatusOfCropSaleReq { get; set; }
+        public Nullable<System.DateTime> DateOfRequestForSell { get; set; }
+        public Nullable<System.DateTime> DateOfSoldCrop { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblBidCrop> tblBidCrops { get; set; }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="dbFarmerScheme3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="dbFarmerScheme3Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="sysdiagrams">
     <Key>
       <PropertyRef Name="diagram_id" />
@@ -84,7 +84,6 @@
     <Property Name="SoldPrice" Type="money" />
     <Property Name="TotalPrice" Type="money" />
     <Property Name="StatusOfCropSaleReq" Type="varchar" MaxLength="20" />
-    <Property Name="DateOfSoldCrop" Type="date" />
   </EntityType>
   <EntityType Name="tblFarmer">
     <Key>
@@ -122,7 +121,6 @@
     <Property Name="CropName" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="Area" Type="float" Nullable="false" />
     <Property Name="SumInsuredPerHectare" Type="money" />
-    <Property Name="DateofApplication" Type="date" />
   </EntityType>
   <EntityType Name="tblInsuranceClaim">
     <Key>
@@ -292,41 +290,11 @@
     </ReferentialConstraint>
   </Association>
   <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-  <Function Name="proc_checkexpiredateofclaim" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="policy" Type="int" Mode="In" />
-    <Parameter Name="dateofinsuranceapp" Type="date" Mode="In" />
-    <Parameter Name="dateofloss" Type="date" Mode="In" />
-    <Parameter Name="fid" Type="int" Mode="In" />
-    <Parameter Name="croptype" Type="varchar" Mode="In" />
-  </Function>
   <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
     <Parameter Name="owner_id" Type="int" Mode="In" />
     <Parameter Name="version" Type="int" Mode="In" />
     <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-  </Function>
-  <Function Name="sp_approveBid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="bid" Type="int" Mode="In" />
-    <Parameter Name="cropid" Type="int" Mode="In" />
-  </Function>
-  <Function Name="sp_approveBidder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="bid" Type="int" Mode="In" />
-    <Parameter Name="admin" Type="varchar" Mode="In" />
-    <Parameter Name="adate" Type="date" Mode="In" />
-    <Parameter Name="pass" Type="varchar" Mode="In" />
-    <Parameter Name="email" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="sp_approveFarmer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="fid" Type="int" Mode="In" />
-    <Parameter Name="admin" Type="varchar" Mode="In" />
-    <Parameter Name="aDate" Type="date" Mode="In" />
-    <Parameter Name="pass" Type="varchar" Mode="In" />
-    <Parameter Name="email" Type="varchar" Mode="In" />
-  </Function>
-  <Function Name="sp_approvesale" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="cropid" Type="int" Mode="In" />
-    <Parameter Name="cropType" Type="varchar" Mode="In" />
-    <Parameter Name="cropname" Type="varchar" Mode="In" />
   </Function>
   <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -338,7 +306,6 @@
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
     <Parameter Name="owner_id" Type="int" Mode="In" />
   </Function>
-  <Function Name="sp_getClaimData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_getCropData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_getCropData1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="sp_GetMAxBidAmount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -374,7 +341,7 @@
     <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <EntityContainer Name="dbFarmerScheme3ModelStoreContainer">
+  <EntityContainer Name="dbFarmerScheme3Model1StoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblBidCrops" EntityType="Self.tblBidCrops" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblBidder" EntityType="Self.tblBidder" Schema="dbo" store:Type="Tables" />

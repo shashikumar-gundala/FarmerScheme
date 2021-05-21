@@ -24,7 +24,7 @@ namespace SchemeForFarmers.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No Data Found");
             }
-            return Request.CreateResponse<IEnumerable<sp_getCropData_Result>>(HttpStatusCode.OK,entities.sp_getCropData().ToList());
+            return Request.CreateResponse<IEnumerable<sp_getCropData1_Result>>(HttpStatusCode.OK,entities.sp_getCropData1().ToList());
         }
         [HttpGet]
         [Route("api/bidder/currentMax")]
